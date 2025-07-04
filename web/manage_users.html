@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Manage Users</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #e6f0ff, #f0f4ff);
+      color: #1a1a1a;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #002147;
+      padding: 10px 20px;
+      color: white;
+    }
+    .header img {
+      height: 60px;
+      margin-right: 15px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #002147;
+      margin-bottom: 30px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #ccc;
+      text-align: left;
+    }
+    th {
+      background-color: #004080;
+      color: white;
+    }
+    tr:hover {
+      background-color: #f0f4ff;
+    }
+    .btn {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .btn-danger {
+      background-color: #cc0000;
+      color: white;
+    }
+    .btn-danger:hover {
+      background-color: #b30000;
+    }
+    .back-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #004080;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      text-align: center;
+    }
+    .back-btn:hover {
+      background-color: #0059b3;
+    }
+    .back-btn-container {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div style="display: flex; align-items: center;">
+      <img src="logo.jpg" alt="Logo">
+      <h1>Smart UU Event Manager</h1>
+    </div>
+    <div>👤 Admin</div>
+  </div>
+
+  <div class="container">
+    <h2>Manage Users</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="user-list">
+        <!-- Users will be loaded dynamically -->
+      </tbody>
+    </table>
+
+    <div class="back-btn-container">
+      <a href="admin_dashboard.html" class="back-btn">Back to Dashboard</a>
+    </div>
+  </div>
+
+  <script>
+    function loadUsers() {
+      fetch('ListUsersServlet')
+      .then(response => response.json())
+      .then(users => {
+        let tableBody = document.getElementById('user-list');
+        tableBody.innerHTML = '';
+
+        users.forEach(user => {
+          let row = `<tr>
+            <td>${user.id}</td>
+            <td>${user.username}</td>
+            <td>${user.email}</td>
+            <td>${user.role}</td>
+            <td><button class="btn btn-danger" onclick="deleteUser(${user.id})">Delete</button></td>
+          </tr>`;
+          tableBody.innerHTML += row;
+        });
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('user-list').innerHTML = '<tr><td colspan="5">Failed to load users.</td></tr>';
+      });
+    }
+
+    function deleteUser(userId) {
+      if (confirm("Are you sure you want to delete this user?")) {
+        fetch('DeleteUserServlet?id=' + userId, { method: 'GET' })
+        .then(response => response.text())
+        .then(data => {
+          alert(data);
+          loadUsers();
+        })
+        .catch(error => console.error('Error:', error));
+      }
+    }
+
+    window.onload = loadUsers;
+  </script>
+
+</body>
+</html>

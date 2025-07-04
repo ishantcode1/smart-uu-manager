@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart UU Event Manager</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('Uttaranchal-University.png') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 50px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo {
+      width: 250px;
+      height: auto;
+      margin-bottom: 20px;
+      border-radius: 0; /* removes any background border if image has one */
+      background: none;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+      color: #f2f2f2;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 30px;
+      color: #dcdcdc;
+    }
+
+    .btn-container {
+      display: flex;
+      gap: 15px;
+    }
+
+    .btn {
+      background-color: #0056b3;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #003f80;
+    }
+
+    .btn-secondary {
+      background-color: #6c757d;
+    }
+
+    .btn-secondary:hover {
+      background-color: #545b62;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <img src="logo.jpg" alt="University Logo" class="logo"/>
+    <h1>Welcome to Smart UU Event Manager</h1>
+    <p>Manage and participate in college events easily.</p>
+    <div class="btn-container">
+      <a href="login.html" class="btn">Login</a>
+      <a href="register.html" class="btn btn-secondary">Register</a>
+    </div>
+  </div>
+</body>
+</html>

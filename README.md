@@ -37,12 +37,4 @@
 - `feedback`: stores event feedback
 - `attendance`: logs event attendance via QR code
 
-## 📷 Screenshots
-> (Add screenshots here in the actual repo)
-
-## 📎 License
-MIT License
-
----
-
-> Developed by [Your Name]
+> Developed by Ishant.
